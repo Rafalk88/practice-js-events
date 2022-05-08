@@ -7,10 +7,10 @@ function init () {
     divList = document.querySelectorAll('div')
     body = document.querySelector('body')
 
-    divList.forEach(function (div) {
+    divList.forEach(function (el) {
 
-        if (div) {
-            div.addEventListener('click', addClassToElement)
+        if (el) {
+            el.addEventListener('click', addClassToElement)
         }
 
     })
@@ -21,17 +21,27 @@ function init () {
 
 function addClassToElement (e) {
 
-    e.currentTarget.classList.add('clicked')
-    e.stopPropagation()
+    const element = e.currentTarget
+    const time = element.dataset.time
 
+    setTimeout(function () {
+
+        element.classList.add('clicked')
+
+    }, time)
+    
 }
 
-function deleteClassFromElement () {
+function deleteClassFromElement (e) {
 
-    divList.forEach(function (e) {
+    if (e.target === e.currentTarget) {
 
-        e.classList.remove('clicked')
+        divList.forEach(function (el) {
 
-    })
-    
+            el.classList.remove('clicked')
+
+        })
+
+    }
+
 }
