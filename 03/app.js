@@ -1,14 +1,17 @@
-const buttons = document.querySelectorAll('button')
+document.addEventListener('DOMContentLoaded', init)
 
-for (let i = 0; i < buttons.length; i++) {
+function init () {
+    const buttons = document.querySelectorAll('button')
+
+    buttons.forEach(function (button) {
+        
+        function buttonHandler(e) {
+            e.currentTarget.innerText = 'clicked'
+            console.log('clicked', e.currentTarget)
+            e.currentTarget.removeEventListener('click', buttonHandler)
+        }
     
-    const button = buttons[i]
-    
-    function buttonHandler() {
-        button.innerText = 'clicked'
-        console.log('clicked')
-        button.removeEventListener('click', buttonHandler)
-    }
-    
-    button.addEventListener('click', buttonHandler)
+        button.addEventListener('click', buttonHandler)
+
+    })
 }
